@@ -13,12 +13,12 @@ def query(payload):
     return response.json()
 
 
-txt = (
+txt = ''.join([
     "I have a VW gti that needs to be sold.",
     "To get it ready for sale, I need to make sure it works and looks good. ",
     "It is currently not starting, and looks pretty shitty.",
     "I don't know how much it would cost to get it ready for sale",
-)
+])
 inny = {"inputs": txt}
 output = query(inny)
 
