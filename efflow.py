@@ -9,7 +9,7 @@ headers = {"Authorization": "Bearer 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"}
 
 def query(payload):
     """issue the query to huggingface"""
-    response = requests.post(API_URL, headers=headers, json=payload)
+    response = requests.post(API_URL, headers=headers, json=payload, timeout=10)
     return response.json()
 
 
