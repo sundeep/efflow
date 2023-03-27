@@ -1,3 +1,6 @@
+"""
+Simple query script, basic fuckery
+"""
 import requests
 
 API_URL = "https://api-inference.huggingface.co/models/microsoft/prophetnet-large-uncased-squad-qg"
@@ -5,6 +8,7 @@ headers = {"Authorization": "Bearer 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"}
 
 
 def query(payload):
+    """issue the query to huggingface"""
     response = requests.post(API_URL, headers=headers, json=payload)
     return response.json()
 
