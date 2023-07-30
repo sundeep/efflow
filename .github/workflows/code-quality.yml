@@ -1,10 +1,10 @@
-name: Checks
-on: [pull_request]
+name: Code Quality Checks (black and pylint)
+on: [pull_request, push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Checks
+    name: Code Quality Checks
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
