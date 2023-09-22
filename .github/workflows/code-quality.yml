@@ -1,20 +1,37 @@
-name: Code Quality Checks (black and pylint)
+name: Python Code Quality Checks
+
 on:
+  pull_request:
   push:
     branches:
-      - main 
-  pull_request:
+      - main
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
-    name: Code Quality Checks
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
       with:
-        python-version: 3.10.9
-    - run: pip install --upgrade pip
-    - run: pip install "black<23" pylint==v3.0.0a3
-    - run: black --diff --check $(git ls-files '*.py')
-    - run: pylint --disable=all --enable=unused-import $(git ls-files '*.py')
+        python-version: 3.9
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pylint black
+
+    - name: Check code formatting with black
+      run: |
+        black --check .
+
+    - name: Run flake8
+      run: |
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+    - name: Run pylint
+      run: |
+        pylint --exit-zero $(find . -name '*.py')
