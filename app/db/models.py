@@ -3,7 +3,7 @@ from datetime import datetime
 from sqlalchemy import Column, DateTime, String
 from sqlalchemy import Integer, ForeignKey
 from sqlalchemy import Table
-from sqlalchemy.orm import relationship, Mapped
+from sqlalchemy.orm import relationship
 
 from .base import Base
 
@@ -23,7 +23,7 @@ flow_tags = Table(
 )
 
 
-class Flow(Base):
+class FlowDB(Base):
     __tablename__ = "flows"
     __allow_unmapped__ = True
 
@@ -33,10 +33,10 @@ class Flow(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    tags = relationship("Tag", secondary=flow_tags, back_populates="flows")
+    tags = relationship("TagDB", secondary=flow_tags, back_populates="flows")
 
 
-class Tag(Base, TimeStampedColumns):
+class TagDB(Base, TimeStampedColumns):
     __tablename__: str = "tags"
     __allow_unmapped__ = True
 
@@ -46,4 +46,4 @@ class Tag(Base, TimeStampedColumns):
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    flows = relationship("Flow", secondary=flow_tags, back_populates="tags")
+    flows = relationship("FlowDB", secondary=flow_tags, back_populates="tags")
