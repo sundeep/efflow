@@ -26,6 +26,7 @@ jobs:
           ${{ runner.os }}-buildx-
 
     - name: Build and run tests with Docker
+      working-directory: ./efflow
       env:
         TEST_DB_USER: ${{ secrets.TEST_DB_USER }}
         TEST_DB_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
