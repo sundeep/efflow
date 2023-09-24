@@ -26,13 +26,13 @@ jobs:
           ${{ runner.os }}-buildx-
 
     - name: Create .env file
-      working-directory: ./efflow/tests
+      working-directory: ./tests
       run: |
         echo "TEST_DB_USER=${{ secrets.TEST_DB_USER }}" > .env
         echo "TEST_DB_PASSWORD=${{ secrets.TEST_DB_PASSWORD }}" >> .env
         echo "TEST_DB=${{ secrets.TEST_DB }}" >> .env
 
     - name: Build and run tests with Docker
-      working-directory: ./efflow/tests
+      working-directory: ./tests
       run: |
         docker-compose -f docker-compose-test.yml up --build
