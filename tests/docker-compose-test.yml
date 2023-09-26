@@ -24,7 +24,7 @@ services:
       - .env
     volumes:
       - ../:/app
-    command: ["./tests/wait-for-it.sh", "test_db:5432", "--", "pytest", "/app/tests/"]
+    command: ["./tests/wait-for-it.sh", "test_db:5432", "--", 'pytest', '--junitxml=pytest.xml', '--cov-report=term-missing:skip-covered', "/app/tests/", "|", "tee", ]
 
 volumes:
   test_pg_data:
