@@ -21,7 +21,7 @@ services:
     environment:
       DATABASE_URL: ${DATABASE_URL}
     volumes:
-      - .:/app
+      - .:/api
 
   init_db:
     build:
@@ -31,7 +31,7 @@ services:
       - db
     environment:
       SQLALCHEMY_DATABASE_URL: ${DATABASE_URL}
-    command: [ "python", "-m", "app.db.init_db" ]
+    command: [ "python", "-m", "api.db.init_db" ]
 
 volumes:
   pg_data:

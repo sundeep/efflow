@@ -1,5 +1,5 @@
-from app.db.base import engine, Base
-from app.db.models import *
+from api.db.base import engine, Base
+from api.db.models import *
 
 
 def init_db():

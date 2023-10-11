@@ -5,8 +5,8 @@ from fastapi import FastAPI, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
-from app.db.base import SessionLocal
-from app.db.models import FlowDB
+from api.db.base import SessionLocal
+from api.db.models import FlowDB
 
 
 # SCHEMAS
