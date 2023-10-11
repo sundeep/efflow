@@ -2,11 +2,27 @@ from datetime import datetime
 from typing import List
 
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
 from api.db.base import SessionLocal
 from api.db.models import FlowDB
+
+# Add CORS Middleware
+app = FastAPI()
+
+# You can adjust the origins list to contain the list of allowed origins.
+# For development purposes, I'm setting it to ["*"], which allows all origins.
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 # SCHEMAS
@@ -42,11 +58,6 @@ def get_flow_from_db(db: Session, flow_id: int):
 
 
 # Routes
-
-
-app = FastAPI()
-
-
 def get_db():
     db = SessionLocal()
     try:
